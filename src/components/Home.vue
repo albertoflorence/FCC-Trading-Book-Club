@@ -25,8 +25,8 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchBooksByField', {
-      commitName: 'setMyBooks',
-      filters: {ownedBy: this.$store.getters.user.userName}
+      commitName: '',
+      filters: {}
     })
   },
   components: {
