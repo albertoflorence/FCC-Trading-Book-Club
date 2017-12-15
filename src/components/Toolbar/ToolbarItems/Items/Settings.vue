@@ -49,8 +49,7 @@ export default {
   data: () => ({
     items: [
       { title: 'My books', icon: 'account_box', link: {name: 'user-books'} },
-      { title: 'Configuration', icon: 'settings', link: {name: 'user-settings'} },
-      { title: 'Loggout', icon: 'exit_to_app', link: { name: 'home' }, action: this.loggout }
+      { title: 'Settings', icon: 'settings', link: {name: 'user-settings'} }
     ]
   }),
   methods: {

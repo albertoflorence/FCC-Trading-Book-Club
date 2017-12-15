@@ -40,16 +40,23 @@
 
 <script>
 export default {
-  props: ['books', 'label'],
+  props: ['books', 'label', 'ownedBy', 'requestedBy', 'commitName'],
   data: () => ({
     element: null
   }),
+  computed: {
+
+  },
   watch: {
     element () {
       this.$emit('onSelectValue', this.element)
     }
   },
-  created () {
+  async created () {
+    await this.$store.dispatch('fetchBooksByField', {
+      commitName: this.commitName,
+      filters: {ownedBy: this.ownedBy, requestedBy: this.requestedBy}
+    })
     const element = this.books.find(e => e.bookId === this.$route.query.book)
     if (element) this.element = element
   }

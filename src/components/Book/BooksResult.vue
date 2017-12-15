@@ -2,6 +2,7 @@
   <v-layout column>
     <v-flex 
       xs12 md6 offset-md3>
+      <form-message name="search"></form-message>
       <v-card
         class="mb-2"
         v-for="book in books"

@@ -23,17 +23,17 @@
             :ripple="true"
             v-for="notification in notifications"
             :key="notification.book" replace 
-            to="/user/books"
+            :to="{path: '/user/books', query: {tab: notification.type === 'trade_request' ? 'My Pending Trades' : 'My Trades'}}"
             @click="seen(notification._id)">
             <v-list-tile-avatar>
               <v-icon color="green" :disabled="notification.seen">new_releases</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title v-html="notification.msg"></v-list-tile-title>
+              <v-list-tile-title v-html="notification.message"></v-list-tile-title>
               <v-list-tile-sub-title>{{notification.time}}</v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn icon @click="remove(notification._id)">
+              <v-btn icon @click.prevent="remove(notification._id)">
                 <v-icon color="red">remove</v-icon>
               </v-btn>
             </v-list-tile-action>

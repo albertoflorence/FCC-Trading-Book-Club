@@ -28,7 +28,7 @@
                 v-model="password">
               </v-text-field>
             </v-card-text>
-            <v-btn :disabled="isLoading" type="submit">
+            <v-btn :disabled="isLoading" type="submit" color="primary">
               <loading-circle :name="form" title="Save"></loading-circle>
             </v-btn>
           </form>

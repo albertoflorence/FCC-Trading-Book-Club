@@ -4,12 +4,13 @@
       <v-badge right slot="activator" v-model="showBadge">
         <span slot="badge">{{count}}</span>
         <v-btn
+          :disabled="isLoading"
           icon class="ma-0"
           @click="register">
           <v-icon large :color="color" :disabled="!isBookmarked">{{ this.icon }}</v-icon>  
         </v-btn>
       </v-badge>
-      <span>{{this.name}} this book</span>
+      <span>add to your {{this.name === 'ownedBy' ? 'books' : 'wish list'}}</span>
     </v-tooltip>
   </div>
 </template>
@@ -28,14 +29,19 @@ export default {
     isBookmarked () {
       if (!Array.isArray(this.book[this.name])) return false
       return this.book[this.name].includes(this.$store.getters.user.userName)
+    },
+    isLoading () {
+      return this.$store.getters.isLoading('bookAction')
     }
   },
   data: () => ({
     show: false
   }),
   methods: {
-    register () {
-      this.$store.dispatch('registerUserBook', { type: this.name, bookId: this.book.bookId })
+    async register () {
+      this.$store.dispatch('startLoading', 'bookAction')
+      await this.$store.dispatch('registerUserBook', { type: this.name, bookId: this.book.bookId })
+      this.$store.dispatch('stopLoading', 'bookAction')
     }
   },
   components: {

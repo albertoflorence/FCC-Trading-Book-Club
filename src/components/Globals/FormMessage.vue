@@ -5,7 +5,7 @@
       outline
       :color="color"
       :icon="icon"
-      :value="lastFormMessage">
+      :value="shouldRender">
       {{message}}
     </v-alert>
   </div>
@@ -19,19 +19,19 @@ export default {
   ],
   computed: {
     message () {
-      return this.$store.getters.formMessage
+      return this.$store.getters.message
     },
-    lastFormMessage () {
-      return this.$store.getters.lastFormMessage === this.name
+    shouldRender () {
+      return this.$store.getters.messageFrom === this.name
     },
-    lastFormMessageType () {
-      return this.$store.getters.lastFormMessageType
+    messageType () {
+      return this.$store.getters.messageType
     },
     icon () {
-      return this.icons[this.lastFormMessageType]
+      return this.icons[this.messageType]
     },
     color () {
-      return this.colors[this.lastFormMessageType]
+      return this.colors[this.messageType]
     }
   },
   data: () => ({

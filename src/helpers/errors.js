@@ -1,33 +1,35 @@
 import {store} from '@/store'
 
 const handle404 = ({from, data}) => {
-  store.dispatch('formError', {
-    msg: data,
+  store.dispatch('messageError', {
+    message: data.message || data.message || data,
     from
   })
 }
 
 const handle400 = ({from, data}) => {
-  store.dispatch('formError', {
-    msg: data,
+  store.dispatch('messageError', {
+    message: data.message || data.message || data,
     from
   })
 }
 
 const handleDefault = ({from, data}) => {
-  store.dispatch('formError', {
-    msg: data,
+  store.dispatch('messageError', {
+    message: data.message || data.message || data,
     from
   })
 }
 
-const handleErrors = (from) => (error) => {
-  if (!error.response) return handleDefault()
+const handleErrors = (from) => ({response}) => {
+  console.log(from)
+  console.log(response)
+  if (!response.status) return
   const params = {
-    data: error.response.data,
+    data: response.data,
     from
   }
-  switch (error.response.status) {
+  switch (response.status) {
     case 404:
       handle404(params)
       break

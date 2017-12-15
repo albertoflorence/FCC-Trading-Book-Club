@@ -8,6 +8,7 @@ import 'vuetify/dist/vuetify.min.css'
 import {store} from './store'
 import LoadingCircle from './components/Globals/LoadingCircle'
 import FormMessage from './components/Globals/FormMessage'
+import DialogMessage from './components/Globals/DialogMessage'
 
 import services from './services'
 
@@ -18,6 +19,7 @@ Vue.use(Vuetify, {
 })
 Vue.component(FormMessage.name, FormMessage)
 Vue.component(LoadingCircle.name, LoadingCircle)
+Vue.component(DialogMessage.name, DialogMessage)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

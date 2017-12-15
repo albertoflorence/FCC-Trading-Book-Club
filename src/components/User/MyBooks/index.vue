@@ -12,57 +12,68 @@
         <v-tabs-slider color="yellow"></v-tabs-slider>
       </v-tabs-bar>
       <v-tabs-items>
-        <v-tabs-content
-          v-for="tab in tabs"
-          :key="tab.name"
-          :id="tab.name">
-          <v-card flat>
-            <books-show :books="tab.content"></books-show>
-          </v-card>
-        </v-tabs-content>
+        <my-books name="My Books"></my-books>
+        <wish-list name="My Wish List"></wish-list>
+        <pending-trades name="My Pending Trades"></pending-trades>
+        <resolved-trades name="My Trades"></resolved-trades>
       </v-tabs-items>
     </v-tabs>
   </v-container>
 </template>
 
 <script>
-import BooksShow from '../../Book/BooksShow'
+import MyBooks from './MyBooks'
+import WishList from './WishList'
+import PendingTrades from './PendingTrades'
+import ResolvedTrades from './ResolvedTrades'
 export default {
   computed: {
-    myBooks () {
-      return this.$store.getters.myBooks
-    },
-    myWishList () {
-      return this.$store.getters.myWishList
-    },
-    myPendingTrades () {
-      return this.$store.getters.myPendingTrades.map(e => e.book)
-    },
     tabs () {
       return [
-        {name: 'My Books', content: this.myBooks},
-        {name: 'My Wish List', content: this.myWishList},
-        {name: 'My Pending Trades', content: this.myPendingTrades}
+        {name: 'My Books'},
+        {name: 'My Wish List'},
+        {name: 'My Pending Trades'},
+        {name: 'My Trades'}
       ]
     }
-  },
-  created () {
-    const user = this.$store.getters.user.userName
-    this.$store.dispatch('fetchBooksByField', {
-      commitName: 'setMyBooks',
-      filters: {ownedBy: user}
-    })
-    this.$store.dispatch('fetchBooksByField', {
-      commitName: 'setMyWishList',
-      filters: {requestedBy: user}
-    })
-    this.$store.dispatch('getTrades')
   },
   data: () => ({
     active: null
   }),
+  methods: {
+    async fetch (action, params) {
+      this.$store.dispatch('startLoading', this.active)
+      await this.$store.dispatch(action, params)
+      this.$store.dispatch('stopLoading', this.active)
+    }
+  },
+  watch: {
+    active () {
+      switch (this.active) {
+        case 'My Books':
+          this.fetch('myBooks')
+          break
+        case 'My Wish List':
+          this.fetch('myWishList')
+          break
+        case 'My Pending Trades':
+          this.fetch('getTrades')
+          break
+        case 'My Trades':
+          this.fetch('getTrades')
+          break
+      }
+    }
+  },
+  created () {
+    const {tab} = this.$route.query
+    this.active = tab
+  },
   components: {
-    BooksShow
+    PendingTrades,
+    MyBooks,
+    WishList,
+    ResolvedTrades
   }
 }
 </script>

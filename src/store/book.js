@@ -1,4 +1,5 @@
 import services from '@/services'
+import {handleErrors} from '@/helpers'
 
 export default {
   state: {
@@ -13,6 +14,9 @@ export default {
   mutations: {
     addBook (state, payload) {
       state.loadedBooks = {...state.loadedBooks, [payload.bookId]: payload}
+    },
+    addManyBooks (state, payload) {
+      state.loadedBooks = {...state.loadedBooks, ...payload}
     },
     setFoundBooks (state, payload) {
       state.foundBooks = payload
@@ -48,24 +52,34 @@ export default {
     },
     registerUserBook: ({commit, dispatch, getters}, payload) =>
       services.book.register(payload)
-      .then(() => dispatch('fetchBookById', payload.bookId)),
-    searchBooks: ({commit}, payload) =>
+      .then(() => dispatch('fetchBookById', payload.bookId))
+      .catch(handleErrors('register')),
+    searchBooks: ({commit, dispatch}, payload) =>
       services.book.get({q: payload})
-      .then(books => commit('setFoundBooks', books)),
+      .then(books => commit('setFoundBooks', books))
+      .then(() => dispatch('clearMessages'))
+      .catch(handleErrors('search')),
     getMatchUsers: ({commit}, payload) =>
       services.book.getMatchUsers(payload)
       .then(users => commit('setMatchedUsers', users)),
-    fetchBooksByField: ({commit, getters, dispatch}, {commitName, filters}) =>
+    fetchBooksByField: ({commit, getters, dispatch}, {commitName, filters} = {}) =>
       services.book.get(filters)
       .then(books => {
-        if (books && books.length > 0) {
-          const filterIds = books.map(book => {
-            commit('addBook', book)
-            return book['bookId']
-          })
-          commit(commitName, filterIds)
+        if (!books || books.length < 1) return
+        let booksObj = {}
+        const ids = books.map(book => {
+          booksObj[book.bookId] = book
+          return book['bookId']
+        })
+        commit('addManyBooks', booksObj)
+        if (commitName) {
+          commit(commitName, ids)
         }
-      })
+      }),
+    myBooks: ({dispatch, getters}) =>
+      dispatch('fetchBooksByField', {commitName: 'setMyBooks', filters: {ownedBy: getters.user.userName}}),
+    myWishList: ({dispatch, getters}) =>
+      dispatch('fetchBooksByField', {commitName: 'setMyWishList', filters: {requestedBy: getters.user.userName}})
   },
   getters: {
     books: ({loadedBooks}) => loadedBooks,

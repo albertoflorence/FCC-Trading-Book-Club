@@ -1,11 +1,14 @@
 import {store} from '@/store'
 const handleResponse = (from, method) => (result) => {
+  console.log(from)
+  console.log(method)
+  console.log(result)
   if (!result) return null
   store.dispatch('stopLoading', from)
-  if (result.msg) {
-    store.dispatch('formSuccess', {
+  if (result.message) {
+    store.dispatch('messageSuccess', {
       from,
-      msg: result.msg
+      message: result.message
     })
   }
   if (method) {

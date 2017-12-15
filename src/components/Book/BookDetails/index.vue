@@ -23,7 +23,8 @@
             <v-flex class="mt-5">
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <action icon="compare_arrows" name="requestedBy" color="orange" :book="this.book"></action>
+                <dialog-message name="register"></dialog-message>
+                <action icon="favorite" name="requestedBy" color="red" :book="this.book"></action>
                 <action icon="turned_in" name="ownedBy" color="green" :book="this.book"></action>
               </v-card-actions>
             </v-flex>

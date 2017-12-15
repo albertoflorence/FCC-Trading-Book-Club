@@ -1,31 +1,29 @@
 export default {
   state: {
-    messages: null,
-    formMessage: null,
-    lastFormMessage: null,
-    lastFormMessageType: null
+    message: null,
+    messageFrom: null,
+    messageType: null
   },
   mutations: {
-    setFormMessage (state, payload) {
-      state.formMessage = payload.msg
-      state.lastFormMessage = payload.from
-      state.lastFormMessageType = payload.type
+    setMessage (state, payload) {
+      state.message = payload.message
+      state.messageFrom = payload.from
+      state.messageType = payload.type
     },
     clearMessages (state) {
-      state.formMessage = null
-      state.messages = null
-      state.lastFormMessage = null
-      state.lastFormMessageType = null
+      state.message = null
+      state.messageFrom = null
+      state.messageType = null
     }
   },
   actions: {
     clearMessages: ({commit}) => commit('clearMessages'),
-    formSuccess: ({commit}, payload) => commit('setFormMessage', {...payload, type: 'success'}),
-    formError: ({commit}, payload) => commit('setFormMessage', {...payload, type: 'error'})
+    messageSuccess: ({commit}, payload) => commit('setMessage', {...payload, type: 'success'}),
+    messageError: ({commit}, payload) => commit('setMessage', {...payload, type: 'error'})
   },
   getters: {
-    formMessage: ({formMessage}) => formMessage,
-    lastFormMessage: ({lastFormMessage}) => lastFormMessage,
-    lastFormMessageType: ({lastFormMessageType}) => lastFormMessageType
+    message: ({message}) => message,
+    messageFrom: ({messageFrom}) => messageFrom,
+    messageType: ({messageType}) => messageType
   }
 }
