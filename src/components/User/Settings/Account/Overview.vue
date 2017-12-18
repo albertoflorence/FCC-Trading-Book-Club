@@ -1,7 +1,7 @@
 <template >
   <v-container v-if="user">
     <v-layout>
-      <v-flex xs6>
+      <v-flex md6>
         <v-card class="pa-5">
           <v-card-title>
             <div class="text-xs-left">

@@ -6,7 +6,7 @@
     botton>
     <v-badge slot="activator" overlap color='red'  v-model="hasNewNotifications">
       <span slot="badge">{{notSeenCount}}</span>
-      <v-btn small icon flat @click="fetchData">
+      <v-btn icon flat @click="fetchData">
         <v-icon>notifications</v-icon>
       </v-btn>
     </v-badge>

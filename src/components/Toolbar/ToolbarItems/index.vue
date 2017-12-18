@@ -1,10 +1,10 @@
 <template>
   <div style="display: inline-flex">
-    <div v-if="isAuthenticated">
-      <notifications class="ml-3"></notifications>
-      <settings class="ml-3"></settings>
+    <div v-if="isAuthenticated" class="hidden-sm-and-down">
+      <notifications></notifications>
+      <settings></settings>
     </div>
-    <link-items class="ml-3"></link-items>
+    <link-items></link-items>
   </div>
 </template>
 

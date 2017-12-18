@@ -4,7 +4,7 @@
     offset-y origin="center center"
     transition="scale-transition"
     bottom>
-    <v-btn small icon flat slot="activator">
+    <v-btn icon flat slot="activator">
       <v-icon>settings</v-icon>
     </v-btn>
     <v-list>
@@ -51,12 +51,7 @@ export default {
       { title: 'My books', icon: 'account_box', link: {name: 'user-books'} },
       { title: 'Settings', icon: 'settings', link: {name: 'user-settings'} }
     ]
-  }),
-  methods: {
-    loggout () {
-      this.$store.dispatch('signOut')
-    }
-  }
+  })
 }
 </script>
 

@@ -1,10 +1,10 @@
 <template>
   <div class="spacing">
     <navigation :activator="nav"></navigation>
-    <v-toolbar color="primary" dark dense fixed app clipped-left :dense="false">
-      <v-toolbar-side-icon @click.stop="nav = !nav" ></v-toolbar-side-icon>
-      <v-toolbar-title 
-        class="mr-5">
+    <v-toolbar color="primary" dark fixed app clipped-left>
+      <v-toolbar-side-icon @click.stop="nav = !nav" class="hidden-md-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title
+        class="mr-5 hidden-sm-and-down">
         <router-link
           :to="{name: 'home'}"
           tag="span"
@@ -13,8 +13,7 @@
         </router-link>
       </v-toolbar-title>
       <search/>
-      <v-spacer></v-spacer>
-      <toolbar-items></toolbar-items>
+      <toolbar-items class="d-flex align-center" style="margin-left: auto"></toolbar-items>
     </v-toolbar>  
   </div>
 </template>

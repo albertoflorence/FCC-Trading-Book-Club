@@ -22,8 +22,6 @@ const handleDefault = ({from, data}) => {
 }
 
 const handleErrors = (from) => ({response}) => {
-  console.log(from)
-  console.log(response)
   if (!response.status) return
   const params = {
     data: response.data,

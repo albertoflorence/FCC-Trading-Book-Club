@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex xs6>
+      <v-flex md6>
         <v-card class="pa-5">
           <form @submit.prevent="changePassword">
             <v-card-title>

@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-flex xs3><menu-items v-on:itemChoose="chosen"></menu-items></v-flex>
-      <v-flex xs8>
+  <v-container fluid>
+    <v-layout wrap>
+      <v-flex md3><menu-items v-on:itemChoose="chosen"></menu-items></v-flex>
+      <v-flex md8>
         <overview v-if="menuItem === 'overview'"></overview>        
         <change-email v-if="menuItem === 'email'"></change-email>
         <change-password v-if="menuItem === 'password'"></change-password>

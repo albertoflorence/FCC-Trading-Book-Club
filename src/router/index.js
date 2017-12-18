@@ -9,6 +9,7 @@ import UserBooks from '@/components/User/MyBooks/index'
 import BookDetails from '@/components/Book/BookDetails/index'
 import BooksResult from '@/components/Book/BooksResult'
 import Trade from '@/components/Book/Trade/index'
+import About from '@/components/About'
 import {isAuth} from './guards'
 
 Vue.use(Router)
@@ -59,6 +60,11 @@ export default new Router({
       props: (route) => ({book: route.query.bookId}),
       name: 'trade',
       component: Trade
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
     },
     {
       path: '*',

@@ -27,7 +27,7 @@ export default {
       return this.count > 0
     },
     isBookmarked () {
-      if (!Array.isArray(this.book[this.name])) return false
+      if (!Array.isArray(this.book[this.name]) || !this.$store.getters.isAuthenticated) return false
       return this.book[this.name].includes(this.$store.getters.user.userName)
     },
     isLoading () {

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    NOT FOUND
-  </div>
+  <h1>
+    PAGE NOT FOUND
+  </h1>
 </template>
 
 <script>

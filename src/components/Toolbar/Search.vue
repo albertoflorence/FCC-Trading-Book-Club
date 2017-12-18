@@ -1,20 +1,15 @@
 <template>
-  <v-layout>
-    <v-flex xs8>
-      <form @submit.prevent="search">
-        <v-text-field
-          clearable
-          light
-          placeholder="Search"
-          append-icon="search"
-          :append-icon-cb="search" 
-          style="max-width: 500px; min-width: 128px;"
-          solo
-          v-model="value">
-        </v-text-field>
-      </form>
-    </v-flex>
-  </v-layout>
+  <form @submit.prevent="search" style="max-width: 500px; min-width: 128px; display: grid; width: 100%">
+    <v-text-field
+      clearable
+      light
+      placeholder="Search"
+      append-icon="search"
+      :append-icon-cb="search" 
+      solo
+      v-model="value">
+    </v-text-field>
+  </form>
 </template>
 
 <script>
