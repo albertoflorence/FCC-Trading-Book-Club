@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="isAuthenticated"
     fixed
     app
     clipped
@@ -40,6 +41,9 @@ export default {
   computed: {
     user () {
       return this.$store.getters.user
+    },
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
     }
   },
   data: () => ({

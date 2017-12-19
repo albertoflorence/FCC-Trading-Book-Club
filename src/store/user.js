@@ -34,11 +34,11 @@ export default {
       services.auth.getSignInUrl(payload)
       .then(url => {
         if (!url) return
-        window.location.href = url.data
+        window.location.href = url
       }),
     signInWithGoogle: ({commit}, payload) =>
       services.auth.signInWithGoogle(payload)
-        .then(user => commit('setUser', user.data)),
+        .then(user => commit('setUser', user)),
     updateUserData: ({commit}, {from, data}) =>
       services.user.updateUser(data.property, data.data)
       .then(handleResponse(from, 'setUserProperty'))
