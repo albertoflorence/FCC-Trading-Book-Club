@@ -44,7 +44,10 @@
               </v-layout>              
             </v-container>
             <v-divider class="mt-4 mb-4"></v-divider>
-            <h3>Source Corde @<a> GibHub</a></h3>
+            <h3>Source Corde GibHub
+              <a href="https://github.com/albertoflorence/FCC-Trading-Book-Club"> @Site</a>
+              <a href="https://github.com/albertoflorence/FCC-Trading-Book-Club-Backend"> @Api</a>
+            </h3>
             <div class="text-xs-right" style="font-size: 12px">
               <span class="grey--text">Alberto Florence @ 2017</span>
             </div>
